@@ -1,0 +1,214 @@
+.chessboard-selector {
+  margin: 0;
+  padding: 25px 20px;
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chessboard-selector h3 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: #fff;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(88, 130, 250, 0.5);
+}
+
+.board-options {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 30px;
+  padding: 10px 5px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.board-option {
+  width: 280px;
+  flex: 0 0 auto;
+  padding: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-color: rgba(40, 40, 70, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.board-option::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.board-option:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(88, 130, 250, 0.3);
+  border-color: rgba(88, 130, 250, 0.4);
+}
+
+.board-option:hover::after {
+  opacity: 1;
+}
+
+.board-option.selected {
+  border-color: rgba(88, 130, 250, 0.8);
+  background-color: rgba(88, 130, 250, 0.2);
+  box-shadow: 0 0 20px rgba(88, 130, 250, 0.4), 0 0 40px rgba(88, 130, 250, 0.2);
+  animation: glow 2s infinite;
+}
+
+.board-preview {
+  width: 100%;
+  height: 140px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.board-option:hover .board-preview {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.board-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.board-option:hover .board-preview img {
+  transform: scale(1.05);
+}
+
+.board-info {
+  text-align: center;
+}
+
+.board-info h4 {
+  margin: 0 0 8px 0;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(88, 130, 250, 0.5);
+}
+
+.board-info p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+}
+
+.continue-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #52c41a, #389e0d);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(56, 158, 13, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.continue-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.continue-button:hover {
+  background: linear-gradient(135deg, #389e0d, #2a7b0a);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(56, 158, 13, 0.3);
+}
+
+.continue-button:hover::after {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chessboard-selector {
+    padding: 20px 15px;
+  }
+
+  .board-options {
+    padding: 5px 0 15px;
+    gap: 15px;
+  }
+
+  .board-option {
+    min-width: 200px;
+    padding: 15px;
+  }
+
+  .board-preview {
+    height: 140px;
+  }
+
+  .chessboard-selector h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .continue-button {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chessboard-selector {
+    padding: 15px 10px;
+  }
+
+  .board-option {
+    min-width: 180px;
+    padding: 12px;
+  }
+
+  .board-preview {
+    height: 120px;
+  }
+
+  .board-info h4 {
+    font-size: 1rem;
+  }
+
+  .board-info p {
+    font-size: 0.8rem;
+  }
+}

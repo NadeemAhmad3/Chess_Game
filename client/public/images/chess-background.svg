@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2c3e50" />
+      <stop offset="100%" stop-color="#1a1a2e" />
+    </linearGradient>
+    
+    <!-- Chess piece patterns -->
+    <pattern id="chessPieces" patternUnits="userSpaceOnUse" width="300" height="300">
+      <!-- King -->
+      <path d="M150,50 L150,70 M130,70 L170,70 M140,70 L140,90 L160,90 L160,70 M130,90 L170,90 M120,90 C120,110 130,120 150,130 C170,120 180,110 180,90 L120,90 M110,130 L190,130 M110,130 L110,140 L190,140 L190,130 M120,140 L180,140 L180,150 L120,150 L120,140 M110,150 L190,150 L190,160 L110,160 L110,150" 
+            fill="none" stroke="#d4d4d8" stroke-width="4" opacity="0.15" transform="translate(0,0)"/>
+      
+      <!-- Queen -->
+      <path d="M150,50 C145,50 140,55 140,60 C140,65 145,70 150,70 C155,70 160,65 160,60 C160,55 155,50 150,50 M140,75 L160,75 M130,75 C130,85 140,95 150,95 C160,95 170,85 170,75 L130,75 M120,95 L180,95 M120,95 L120,105 L180,105 L180,95 M130,105 L170,105 L170,115 L130,115 L130,105 M120,115 L180,115 L180,125 L120,125 L120,115" 
+            fill="none" stroke="#d4d4d8" stroke-width="4" opacity="0.15" transform="translate(0,160)"/>
+      
+      <!-- Rook -->
+      <path d="M130,50 L130,70 L120,70 L120,90 L140,90 L140,70 L160,70 L160,90 L180,90 L180,70 L170,70 L170,50 L130,50 M120,90 L180,90 M120,90 L120,100 L180,100 L180,90 M130,100 L170,100 L170,110 L130,110 L130,100 M120,110 L180,110 L180,120 L120,120 L120,110" 
+            fill="none" stroke="#d4d4d8" stroke-width="4" opacity="0.15" transform="translate(160,0)"/>
+      
+      <!-- Bishop -->
+      <path d="M150,40 C145,40 140,45 140,50 C140,55 145,60 150,60 C155,60 160,55 160,50 C160,45 155,40 150,40 M145,60 L155,60 M140,60 C140,70 145,80 150,90 C155,80 160,70 160,60 L140,60 M130,90 L170,90 M130,90 L130,100 L170,100 L170,90 M140,100 L160,100 L160,110 L140,110 L140,100 M130,110 L170,110 L170,120 L130,120 L130,110" 
+            fill="none" stroke="#d4d4d8" stroke-width="4" opacity="0.15" transform="translate(160,160)"/>
+      
+      <!-- Knight -->
+      <path d="M130,50 L130,60 L140,60 C140,70 150,80 160,80 C170,80 180,70 180,60 L170,60 L170,50 L130,50 M120,80 L160,80 M120,80 L120,90 L160,90 L160,80 M130,90 L150,90 L150,100 L130,100 L130,90 M120,100 L160,100 L160,110 L120,110 L120,100" 
+            fill="none" stroke="#d4d4d8" stroke-width="4" opacity="0.15" transform="translate(0,320)"/>
+      
+      <!-- Pawn -->
+      <path d="M150,60 C145,60 140,65 140,70 C140,75 145,80 150,80 C155,80 160,75 160,70 C160,65 155,60 150,60 M140,80 L160,80 M140,80 C140,90 145,100 150,100 C155,100 160,90 160,80 M130,100 L170,100 M130,100 L130,110 L170,110 L170,100" 
+            fill="none" stroke="#d4d4d8" stroke-width="4" opacity="0.15" transform="translate(160,320)"/>
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#bgGradient)" />
+  
+  <!-- Chess board pattern -->
+  <rect width="100%" height="100%" fill="url(#chessPieces)" opacity="0.7" />
+  
+  <!-- Overlay with subtle chess pattern -->
+  <rect width="100%" height="100%" fill="url(#chessPieces)" opacity="0.3" transform="rotate(45, 600, 400)" />
+  
+  <!-- Light effect in the center -->
+  <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+  </radialGradient>
+  <circle cx="600" cy="400" r="400" fill="url(#centerGlow)" />
+</svg>

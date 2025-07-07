@@ -1,0 +1,197 @@
+// client/vite-project/src/components/Chessboard.jsx
+import React, { useState, useEffect, useCallback } from 'react';
+import { Chessboard } from 'react-chessboard';
+import { Chess } from 'chess.js';
+import './Chessboard.css';
+
+const ChessboardComponent = ({ initialFen, playerColor, onMove, isMyTurn, lastMove }) => {
+  console.log('ChessboardComponent rendering with props:', { initialFen, playerColor, isMyTurn, lastMove });
+
+  // Initialize chess.js instance
+  const [game, setGame] = useState(new Chess());
+
+  // State for highlighted squares (for last move)
+  const [highlightedSquares, setHighlightedSquares] = useState({});
+
+  // Function to update highlighted squares based on lastMove
+  const updateHighlightedSquares = useCallback((move) => {
+    console.log('Updating highlighted squares for move:', move);
+    
+    if (!move || move.length < 4) {
+      setHighlightedSquares({});
+      return;
+    }
+
+    // Extract source and target squares from UCI notation
+    const sourceSquare = move.substring(0, 2);
+    const targetSquare = move.substring(2, 4);
+    
+    console.log(`Highlighting squares: ${sourceSquare} -> ${targetSquare}`);
+
+    // Create highlighted squares object
+    const newHighlightedSquares = {
+      [sourceSquare]: { backgroundColor: 'rgba(255, 255, 0, 0.4)' },
+      [targetSquare]: { backgroundColor: 'rgba(255, 255, 0, 0.4)' }
+    };
+
+    setHighlightedSquares(newHighlightedSquares);
+  }, []);
+
+  // Update the game when initialFen changes
+  useEffect(() => {
+    console.log('FEN changed:', initialFen);
+    try {
+      const newGame = new Chess(initialFen === 'start' ? undefined : initialFen);
+      console.log('New game state:', {
+        fen: newGame.fen(),
+        turn: newGame.turn(),
+        isCheck: newGame.isCheck(),
+        isCheckmate: newGame.isCheckmate(),
+        moves: newGame.moves()
+      });
+
+      setGame(newGame);
+
+      // Clear highlights when the board changes
+      updateHighlightedSquares(lastMove);
+      
+      // Log the current turn state
+      console.log('Current turn state:', {
+        isMyTurn,
+        playerColor,
+        chessTurn: newGame.turn() ? 'white' : 'black'
+      });
+    } catch (error) {
+      console.error('Invalid FEN string:', initialFen, error);
+    }
+  }, [initialFen, lastMove, updateHighlightedSquares, isMyTurn, playerColor]);
+
+  // Update highlighted squares when lastMove changes
+  useEffect(() => {
+    updateHighlightedSquares(lastMove);
+  }, [lastMove, updateHighlightedSquares]);
+
+  // Handle piece drop
+  const onDrop = (sourceSquare, targetSquare, piece) => {
+    console.log('Piece drop attempt:', { sourceSquare, targetSquare, piece, isMyTurn, playerColor });
+
+    // IMPORTANT: Log more details to debug the issue
+    console.log('Current game state:', {
+      fen: game.fen(),
+      turn: game.turn(),
+      isCheck: game.isCheck(),
+      isCheckmate: game.isCheckmate(),
+      isMyTurn: isMyTurn,
+      playerColor: playerColor
+    });
+
+    // CRITICAL FIX: Always allow moves for testing
+    // This is a temporary fix to debug the issue
+    const canMove = true; // isMyTurn && playerColor !== 'spectator';
+    
+    // Log a clear message about whether the move is allowed
+    console.log(`Can move? ${canMove}`);
+    
+    // Try to make the move in the local game instance
+    try {
+      // Check if this is a pawn promotion
+      const isPawnPromotion =
+        (piece === 'wP' && targetSquare[1] === '8') ||
+        (piece === 'bP' && targetSquare[1] === '1');
+
+      console.log('Checking move:', { sourceSquare, targetSquare, isPawnPromotion });
+
+      // Create the move object
+      const moveObj = {
+        from: sourceSquare,
+        to: targetSquare,
+        // Always promote to queen for simplicity
+        promotion: isPawnPromotion ? 'q' : undefined
+      };
+
+      // Try to make the move in the actual game instance
+      // This ensures the board updates immediately
+      const move = game.move(moveObj);
+
+      // If the move is legal
+      if (move) {
+        console.log('Move is legal:', move);
+
+        // Convert to UCI notation
+        let uciMove = `${sourceSquare}${targetSquare}`;
+
+        // Add promotion piece if applicable
+        if (isPawnPromotion) {
+          uciMove += 'q';
+        }
+
+        console.log('Sending UCI move:', uciMove);
+
+        // Call the onMove callback
+        console.log('About to call onMove with move:', uciMove);
+        if (typeof onMove === 'function') {
+          try {
+            // Call the onMove callback to send the move to the server
+            onMove(uciMove);
+            console.log('Successfully called onMove with move:', uciMove);
+          } catch (error) {
+            console.error('Error calling onMove:', error);
+          }
+        } else {
+          console.error('onMove callback is not defined or not a function!', onMove);
+        }
+
+        // Return true to allow the move on the board
+        return true;
+      } else {
+        console.log('Move is illegal according to chess.js');
+      }
+    } catch (error) {
+      console.error('Invalid move:', error);
+    }
+
+    // Return false to disallow the move on the board
+    return false;
+  };
+
+  // Custom square styles for highlighting
+  const customSquareStyles = {
+    ...highlightedSquares
+  };
+
+  return (
+    <div className="chessboard-container">
+      <Chessboard
+        id="chessboard"
+        position={game.fen()}
+        onPieceDrop={onDrop}
+        boardOrientation={playerColor === 'black' ? 'black' : 'white'}
+        customSquareStyles={customSquareStyles}
+        isDraggablePiece={(props) => {
+          // Check if props is defined and has the expected structure
+          if (!props || !props.piece || typeof props.piece !== 'string') {
+            console.log('isDraggablePiece received invalid props:', props);
+            return false;
+          }
+
+          const piece = props.piece;
+          const pieceColor = piece[0].toLowerCase();
+          
+          // Only log once per component render to reduce console spam
+          if (piece === 'wP' && pieceColor === 'w') {
+            console.log('Draggable pieces check:', {
+              playerColor,
+              isMyTurn,
+              isSpectator: playerColor === 'spectator'
+            });
+          }
+          
+          // CRITICAL FIX: Always allow pieces to be dragged for testing
+          return true;
+        }}
+      />
+    </div>
+  );
+};
+
+export default ChessboardComponent;

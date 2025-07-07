@@ -1,0 +1,55 @@
+/* Chessboard.css */
+.chessboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -35px 0 0 0; /* Increased negative top margin to pull board up by 5% more */
+  flex-direction: column;
+  width: 540px; /* Reduced width by 10% from 600px */
+  height: 540px; /* Reduced height by 10% from 600px */
+  position: relative;
+  z-index: 1;
+}
+
+/* Add some responsive sizing */
+@media (max-width: 1200px) {
+  .chessboard-container {
+    width: 450px; /* Reduced width by 10% from 500px */
+    height: 450px; /* Reduced height by 10% from 500px */
+  }
+}
+
+@media (max-width: 992px) {
+  .chessboard-container {
+    width: 405px; /* Reduced width by 10% from 450px */
+    height: 405px; /* Reduced height by 10% from 450px */
+  }
+}
+
+@media (max-width: 768px) {
+  .chessboard-container {
+    width: 360px; /* Reduced width by 10% from 400px */
+    height: 360px; /* Reduced height by 10% from 400px */
+    margin: -15px auto 10px auto; /* Negative top margin to pull board up by 5% more */
+  }
+}
+
+@media (max-width: 576px) {
+  .chessboard-container {
+    width: 315px; /* Reduced width by 10% from 350px */
+    height: 315px; /* Reduced height by 10% from 350px */
+  }
+}
+
+/* Animation for captures */
+@keyframes captureGlow {
+  0% {
+    box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0);
+  }
+}

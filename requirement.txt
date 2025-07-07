@@ -1,0 +1,9 @@
+# Backend
+python-chess
+# Potentially Flask or FastAPI if you want an HTTP API for lobby, though pure sockets are also fine
+# Websockets library if you choose that over raw TCP sockets for web client (e.g., 'websockets' or 'aiohttp')
+websockets
+# For Frontend (managed by npm/yarn in the Vite project, but good to note)
+# react
+# react-dom
+# Other UI libraries for chess board display (e.g., chessboardjsx or build your own)

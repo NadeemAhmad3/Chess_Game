@@ -1,0 +1,268 @@
+/* client/vite-project/src/components/Timer.css */
+
+.timers-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 140px; /* Width for the timers */
+  position: fixed; /* Fixed position relative to the viewport */
+  right: 30px; /* Position on the right side of the page */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100; /* Higher z-index to ensure it's above other elements */
+  pointer-events: none;
+}
+
+/* Position black timer at the top */
+.timer.black {
+  position: relative;
+  width: 100%; /* Full width of container */
+  margin-bottom: 10px;
+}
+
+/* Position white timer at the bottom */
+.timer.white {
+  position: relative;
+  width: 100%; /* Full width of container */
+  margin-top: 10px;
+}
+
+/* Hide the current turn indicator */
+.current-turn {
+  display: none;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background-color: rgba(220, 220, 220, 0.7); /* Semi-transparent grey */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  pointer-events: auto; /* Enable pointer events for the timer */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  margin-bottom: 5px;
+}
+
+.timer.white {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.timer.black {
+  background-color: rgba(200, 200, 200, 0.7);
+}
+
+/* Timer icon styling */
+.timer-icon {
+  font-size: 24px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.timer.white .timer-icon {
+  color: #000;
+}
+
+.timer.black .timer-icon {
+  color: #000;
+}
+
+.timer-content {
+  flex: 1;
+}
+
+/* Style for the player's own timer */
+.timer.my-timer {
+  font-weight: bold;
+}
+
+.timer-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.timer-time {
+  font-size: 18px;
+  font-family: monospace;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Style for low time warning (less than 30 seconds) */
+.timer.low-time .timer-time {
+  color: #e74c3c;
+}
+
+/* Style for very low time warning (less than 10 seconds) */
+.timer.very-low-time .timer-time {
+  color: #e74c3c;
+  animation: pulse 1s infinite;
+}
+
+/* Style for critical time warning (less than 5 seconds) */
+.timer.critical-time {
+  background-color: rgba(255, 235, 238, 0.9);
+  border-color: #e74c3c;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+}
+
+.timer.critical-time .timer-time {
+  color: #e74c3c;
+  font-size: 20px;
+  animation: pulse 0.5s infinite;
+}
+
+.timer.critical-time .timer-icon {
+  animation: pulse 0.5s infinite;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+}
+
+/* Urgent style for player's own timer when it's their turn and time is critical */
+.timer.urgent {
+  animation: shake 0.5s infinite;
+  background-color: rgba(255, 221, 224, 0.9);
+  border-color: #c0392b;
+  box-shadow: 0 0 12px rgba(192, 57, 43, 0.7);
+}
+
+/* Make active timer more visible */
+.timer.active {
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+  background-color: rgba(230, 247, 255, 0.9);
+  transform: scale(1.05);
+}
+
+.timer.active .timer-icon {
+  background-color: rgba(52, 152, 219, 0.2);
+  border: 1px solid rgba(52, 152, 219, 0.5);
+}
+
+.current-turn {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.turn-indicator {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.turn-indicator.white {
+  color: #333;
+}
+
+.turn-indicator.black {
+  color: #000;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive styles for different screen sizes */
+@media (max-width: 1200px) {
+  .timers-container {
+    width: 130px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .timers-container {
+    width: 120px;
+    right: 15px;
+  }
+
+  .timer-icon {
+    font-size: 22px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .timer-time {
+    font-size: 16px;
+  }
+
+  .timer-label {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .timers-container {
+    width: 110px;
+    right: 10px;
+  }
+
+  .timer-icon {
+    font-size: 20px;
+    width: 26px;
+    height: 26px;
+    margin-right: 6px;
+  }
+
+  .timer {
+    padding: 6px 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .timers-container {
+    width: 90px;
+    right: 5px;
+  }
+
+  .timer-icon {
+    font-size: 18px;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+  }
+
+  .timer-time {
+    font-size: 14px;
+  }
+
+  .timer-label {
+    font-size: 10px;
+  }
+}

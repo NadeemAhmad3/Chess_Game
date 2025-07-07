@@ -1,0 +1,298 @@
+/* Game Result Component Styles */
+
+.game-result {
+  padding: 25px;
+  background-color: #fff8e6;
+  border-left: 4px solid #faad14;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeInUp 0.6s ease-out;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1000;
+  position: relative;
+}
+
+.game-result h3 {
+  margin-top: 0;
+  color: #d48806;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.game-result p {
+  margin: 10px 0;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Result types */
+.game-result.checkmate {
+  background-color: #f6ffed;
+  border-left-color: #52c41a;
+}
+
+.game-result.checkmate h3 {
+  color: #389e0d;
+}
+
+.game-result.timeout {
+  background-color: #fff2e8;
+  border-left-color: #fa541c;
+}
+
+.game-result.timeout h3 {
+  color: #d4380d;
+}
+
+.game-result.draw {
+  background-color: #f0f5ff;
+  border-left-color: #1890ff;
+}
+
+.game-result.draw h3 {
+  color: #096dd9;
+}
+
+.game-result.disconnection {
+  background-color: #fff0f6;
+  border-left-color: #eb2f96;
+}
+
+.game-result.disconnection h3 {
+  color: #c41d7f;
+}
+
+/* Player perspective styles */
+.game-result .player-perspective {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.game-result .player-perspective.win {
+  background-color: #f6ffed;
+  color: #52c41a;
+  border: 1px solid #b7eb8f;
+}
+
+.game-result .player-perspective.loss {
+  background-color: #fff1f0;
+  color: #f5222d;
+  border: 1px solid #ffa39e;
+}
+
+.game-result .player-perspective.draw {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  border: 1px solid #91d5ff;
+}
+
+/* Result details */
+.game-result .result-details {
+  margin: 15px 0;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+}
+
+.game-result .winner {
+  font-weight: bold;
+  color: #389e0d;
+  text-transform: capitalize;
+}
+
+.game-result .loser {
+  font-weight: bold;
+  color: #cf1322;
+  text-transform: capitalize;
+}
+
+.game-result .timeout-result {
+  color: #d4380d;
+  font-weight: bold;
+}
+
+.game-result .timed-out-player {
+  font-weight: bold;
+  color: #d4380d;
+  text-transform: capitalize;
+}
+
+.game-result .disconnection {
+  color: #cf1322;
+}
+
+.game-result .draw-reason {
+  color: #096dd9;
+  font-weight: bold;
+}
+
+.game-result .game-end-message {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #262626;
+  border-left: 3px solid #1890ff;
+}
+
+/* Timer display in results */
+.game-result .timer-display {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 15px 0;
+}
+
+.game-result .timer-display .timer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-result .timer-display .timer-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.game-result .timer-display .timer-value {
+  font-size: 20px;
+  font-family: monospace;
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.game-result .timer-display .timer-value.zero {
+  color: #f5222d;
+  background-color: #fff1f0;
+}
+
+/* Action buttons */
+.game-result-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.play-again-btn {
+  padding: 12px 24px;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 140px;
+}
+
+.play-again-btn:hover {
+  background-color: #096dd9;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.play-again-btn:active {
+  transform: translateY(0);
+}
+
+.back-to-lobby-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-to-lobby-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.back-to-lobby-btn:hover {
+  background-color: #c0392b;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-lobby-btn:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseAttention {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.game-result.timeout {
+  animation: fadeInUp 0.6s ease-out, pulseAttention 2s ease-in-out 0.6s 3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .game-result {
+    padding: 15px;
+  }
+
+  .game-result h3 {
+    font-size: 24px;
+  }
+
+  .game-result p {
+    font-size: 16px;
+  }
+
+  .game-result .player-perspective {
+    font-size: 18px;
+  }
+
+  .game-result .timer-display {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
